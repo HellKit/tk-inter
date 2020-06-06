@@ -8,6 +8,7 @@ from logic_func import (
 
 
 def root_settings():
+    '''Создаем root Tk'''
     root = Tk()
     root.title('Надо бы, что-то тут написать!')
     root.geometry("950x600")
@@ -15,6 +16,7 @@ def root_settings():
     return root
 
 def canva_settings(root):
+    '''Создаем Canvas settings'''
     conv = Canvas(root, bg='black', width=4000, height=4000)
     conv.create_text(450, 50, text="Мои текущие задачи",
                     font="Verdana 28", fill='yellow')
@@ -22,11 +24,13 @@ def canva_settings(root):
     return conv
 
 
-def color_message(idx, data_text, text, color):
+def color_message(idx: int, data_text: str, text: str, color: str):
+    '''Для смены цветов и отображения текста'''
     conv.create_text(450, 100+idx, text=f'{data_text} {text}',
                     justify='right', font='Verdana 14', fill=f'{color}')
 
 def message_print(conv, days_texts: dict):
+    '''Главная функция по выводу в интерфейс приложения'''
     for idx, value in enumerate(days_texts.items()):
         idx *= 30
         if value[0] > 0:

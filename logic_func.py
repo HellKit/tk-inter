@@ -42,18 +42,18 @@ def get_dict_corted_list(texts: list, days_list: list) -> dict:
 def resultate_text_date(args: str, day: int) -> str:
     '''Выводит дни в правильном склонении'''
     if args == 'next':
-        args = ('Через')
+        args = ('Остался', 'Осталось')
     if args == 'prev':
         args = ('Прошел', 'Прошло')
         
     if day % 10 == 1 and day != 11:
-        return f'{args if len(args) != 2 else args[0]} {day} день :'
+        return f'{args[0]} {day} день :'
     elif day % 10 in [2, 3, 4] and day // 10 not in [1]:
-        return f'{args if len(args) != 2 else args[1]} {day} дня :'
+        return f'{args[1]} {day} дня :'
     elif day == 0:
         return 'Сегодня :'
     else:
-        return f'{args if len(args) != 2 else args[1]} {day} дней :'
+        return f'{args[1]} {day} дней :'
 
 if __name__ == '__main__':
     date_list, texts = (
