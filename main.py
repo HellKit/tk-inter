@@ -17,14 +17,14 @@ def root_settings():
 def canva_settings(root):
     conv = Canvas(root, bg='black', width=4000, height=4000)
     conv.create_text(450, 50, text="Мои текущие задачи",
-                    justify='center', font="Verdana 28", fill='yellow')
+                    font="Verdana 28", fill='yellow')
     conv.create_line(250, 70, 650, 70, fill='yellow')
     return conv
 
 
 def color_message(idx, data_text, text, color):
     conv.create_text(450, 100+idx, text=f'{data_text} {text}',
-                    justify='center', font='Verdana 14', fill=f'{color}')
+                    justify='right', font='Verdana 14', fill=f'{color}')
 
 def message_print(conv, days_texts: dict):
     for idx, value in enumerate(days_texts.items()):

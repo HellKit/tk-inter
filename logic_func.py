@@ -22,7 +22,7 @@ def get_days_time(date_list: list) -> list:
     return [
             0 if ':' in str(year - DATA_TODAY).split()[0] 
             else int(str(year - DATA_TODAY).split()[0]) 
-            for year in [date(int(val[0]), int(val[1]), int(val[2])) 
+            for year in [date(int(val[2]), int(val[1]), int(val[0])) 
             for val in [value.split('.') for value in date_list]]
         ]
         
