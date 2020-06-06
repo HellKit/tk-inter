@@ -39,7 +39,8 @@ def message_print(conv, days_texts: dict):
             color_message(idx, text_date, value[1], 'red')
         elif value[0] > 7:
             color_message(idx, text_date, value[1], 'white')
-
+        else:
+            color_message(idx, text_date, value[1], 'orange')
 
 
 if __name__ == '__main__':

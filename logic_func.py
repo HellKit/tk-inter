@@ -51,7 +51,7 @@ def resultate_text_date(args: str, day: int) -> str:
     elif day % 10 in [2, 3, 4] and day // 10 not in [1]:
         return f'{args if len(args) != 2 else args[1]} {day} дня :'
     elif day == 0:
-        return 'Сегодня'
+        return 'Сегодня :'
     else:
         return f'{args if len(args) != 2 else args[1]} {day} дней :'
 
