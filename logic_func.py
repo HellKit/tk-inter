@@ -12,38 +12,39 @@ def read_file_and_get_date_and_text(file_name: str) -> (list, list):
     rec = re.compile(r'(\d+\.\d+\.\d+)') # компилируем регулярное выражение
     with open(path, encoding='utf') as f:
         data = f.readlines() 
-        date_list = [rec.search(value)[0] for value in data] # список дат
-        text = [rec.split(value)[-1].strip() for value in data] # список тектса
+        date_list = [rec.search(value)[0] for value in data]
+        text = [rec.split(value)[-1].strip() for value in data]
     return date_list, text
 
 
-def get_days_time(date_list: list) -> list:
+def get_days_time(date_l: list) -> list:
     '''Возвращаем количество дней в списке'''
+    # Это было создано 06.06.2020
     return [
             0 if ':' in str(year - DATA_TODAY).split()[0] 
             else int(str(year - DATA_TODAY).split()[0]) 
             for year in [date(int(val[2]), int(val[1]), int(val[0])) 
-            for val in [value.split('.') for value in date_list]]
+            for val in [value.split('.') for value in date_l]]
         ]
         
 
-def get_dict_corted_list(texts: list, days_list: list) -> dict:
+def get_dict_sorted_list(texts: list, days: list) -> dict:
     '''Возвращаем отсортированные данные 
     по возрастанию в виде словоря'''
-    dict_num_dict = {
-        days_list[idx]: text for idx, text in enumerate(texts)
+    dict_num_list = {
+        days[idx]: text for idx, text in enumerate(texts)
     } # записываем начальные данные в словарь key: value - (key - date, value - text)
-    days_list = sorted(days_list) # сортируем список
+    days = sorted(days)
     return {
-        days_list[idx]: dict_num_dict[days_list[idx]] 
-        for idx in range(len(dict_num_dict))
+        days[idx]: dict_num_list[days[idx]] 
+        for idx in range(len(dict_num_list))
     }
 
-def resultate_text_date(args: str, day: int) -> str:
+def result_text_date(args: str, day: int) -> str:
     '''Выводит дни в правильном склонении'''
     if args == 'next':
         args = ('Остался', 'Осталось')
-    if args == 'prev':
+    else: # 'prev'
         args = ('Прошел', 'Прошло')
         
     if day % 10 == 1 and day != 11:
@@ -64,6 +65,6 @@ if __name__ == '__main__':
     # print(f'{text=}\n')
     days_list = get_days_time(date_list)
     # print(days_list)
-    days_texts = get_dict_corted_list(texts, days_list)
+    days_texts = get_dict_sorted_list(texts, days_list)
     print(days_texts)
     
