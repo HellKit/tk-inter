@@ -33,12 +33,11 @@ def settings_message(idx: int, data_text: str, text: str, color: str):
 def message_print(canva, days_texts: list):
     '''Главная функция по выводу в интерфейс приложения'''
     for idx, element in enumerate(days_texts):
-        idx *= 30
         if element['days'] > 0:
             text_date = result_text_date('next', element['days'])
         else:
             text_date = result_text_date('prev', -element['days'])
-        settings_message(idx, text_date, element['text'], element['color'])
+        settings_message(idx*30, text_date, element['text'], element['color'])
 
 
 if __name__ == '__main__':
