@@ -27,8 +27,8 @@ def canvas_settings(root):
 
 def settings_message(idx: int, data_text: str, text: str, color: str):
     '''Для смены цветов и отображения текста'''
-    canva.create_text(450, 100+idx, text=f'{data_text} {text}',
-                    font='Verdana 14', fill=f'{color}')
+    canva.create_text(150, 100+idx, text=f'{data_text} {text}',
+                   anchor='w', font='Verdana 14', fill=f'{color}')
 
 
 def message_print(canva, days_texts: dict):
