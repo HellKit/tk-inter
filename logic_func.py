@@ -40,9 +40,9 @@ def get_dict_sorted_list(texts: list, days: list) -> dict:
         for idx in range(len(dict_num_list))
     }
 
-def result_text_date(args: str, day: int) -> str:
+def result_text_date(arg: str, day: int) -> str:
     '''Выводит дни в правильном склонении'''
-    if args == 'next':
+    if arg == 'next':
         args = ('Остался', 'Осталось')
     else: # 'prev'
         args = ('Прошел', 'Прошло')
