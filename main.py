@@ -36,7 +36,7 @@ def message_print(canva, days_texts: list):
         if element['days'] > 0:
             text_date = result_text_date('next', element['days'])
         else:
-            text_date = result_text_date('prev', -element['days'])
+            text_date = result_text_date('prev', abs(element['days']))
         settings_message(idx*30, text_date, element['text'], element['color'])
 
 
