@@ -13,15 +13,11 @@ def read_file_and_get_date_and_text(file_name: str) -> (list, list):
     rec = re.compile(r'(\d+\.\d+\.\d+)')  # компилируем регулярное выражение
     with open(path, encoding='utf') as f:
         data = f.readlines()
-        date_list = [rec.search(value)[0] for value in data]
+        date_list = [(datetime.strptime(
+            '.'.join(day.split('.')[::-1]), '%Y.%m.%d').date() - date.today()).days
+            for day in [rec.search(value)[0] for value in data]]
         text = [rec.split(value)[-1].strip() for value in data]
     return date_list, text
-
-
-def get_days_time(date_l: list) -> list:
-    '''Возвращает количество дней в списке'''
-    return [(datetime.strptime('.'.join(day.split('.')[::-1]),
-                               '%Y.%m.%d').date() - date.today()).days for day in date_l]
 
 
 def get_dict_sorted_list(texts: list, days: list) -> dict:
@@ -55,7 +51,7 @@ def result_text_date(arg: str, day: int) -> str:
 
     if day % 10 == 1 and day != 11:
         return f'{args[0]} день :'
-    elif day % 10 in range(2,5) and day // 10 != 1:
+    elif day % 10 in range(2, 5) and day // 10 != 1:
         return f'{args[1]} дня :'
     elif day == 0:
         return 'Сегодня :'
@@ -64,10 +60,10 @@ def result_text_date(arg: str, day: int) -> str:
 
 
 if __name__ == '__main__':
-    date_list, texts = (
+    days_list, texts = (
         read_file_and_get_date_and_text('do.txt')
     )
-    days_list = get_days_time(date_list)
+    # days_list = get_days_time(date_list)
     list_dict = get_dict_sorted_list(texts, days_list)
     list_dict = add_color(list_dict)
     print(list_dict)

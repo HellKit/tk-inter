@@ -1,8 +1,8 @@
 from tkinter import Tk, Canvas
 from logic_func import (
     read_file_and_get_date_and_text,
-    get_days_time, get_dict_sorted_list,
-    result_text_date, add_color
+    get_dict_sorted_list, result_text_date,
+    add_color
 )
 
 
@@ -32,17 +32,16 @@ def message_print(canva, days_texts: list):
         else:
             text_date = result_text_date('prev', -element['days'])
         canva.create_text(150, 100+idx*30, text=f"{text_date} {element['text']}",
-                      anchor='w', font='Verdana 14', fill=f"{element['color']}")
+                          anchor='w', font='Verdana 14', fill=f"{element['color']}")
 
 
 if __name__ == '__main__':
     root = root_settings()
     canva = canvas_settings(root)
 
-    date_list, texts = (
+    days_list, texts = (
         read_file_and_get_date_and_text('do.txt')
     )
-    days_list = get_days_time(date_list)
     list_dict = get_dict_sorted_list(texts, days_list)
     list_dict = add_color(list_dict)
     message_print(canva, list_dict)
