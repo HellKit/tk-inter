@@ -24,21 +24,15 @@ def canvas_settings(root):
     return canva
 
 
-def settings_message(idx: int, data_text: str, text: str, color: str):
-    '''Для смены цветов и отображения текста'''
-    canva.create_text(150, 100+idx, text=f'{data_text} {text}',
-                      anchor='w', font='Verdana 14', fill=f'{color}')
-
-
 def message_print(canva, days_texts: list):
     '''Главная функция по выводу в интерфейс приложения'''
     for idx, element in enumerate(days_texts):
-        idx *= 30
         if element['days'] > 0:
             text_date = result_text_date('next', element['days'])
         else:
             text_date = result_text_date('prev', -element['days'])
-        settings_message(idx, text_date, element['text'], element['color'])
+        canva.create_text(150, 100+idx*30, text=f"{text_date} {element['text']}",
+                      anchor='w', font='Verdana 14', fill=f"{element['color']}")
 
 
 if __name__ == '__main__':

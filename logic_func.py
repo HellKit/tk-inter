@@ -1,6 +1,6 @@
 import os
 import re
-from datetime import datetime, date, timedelta
+from datetime import date, datetime
 
 
 BASE_DIR = os.getcwd()  # указываем текущую дерикторию
@@ -20,21 +20,15 @@ def read_file_and_get_date_and_text(file_name: str) -> (list, list):
 
 def get_days_time(date_l: list) -> list:
     '''Возвращает количество дней в списке'''
-    return [
-        0 if ':' in str(year - date.today()).split()[0]
-        else int(str(year - date.today()).split()[0])
-        for year in [date(int(val[2]), int(val[1]), int(val[0]))
-                     for val in [value.split('.') for value in date_l]]
-    ]
+    return [(datetime.strptime('.'.join(day.split('.')[::-1]),
+                               '%Y.%m.%d').date() - date.today()).days for day in date_l]
 
 
 def get_dict_sorted_list(texts: list, days: list) -> dict:
     '''Возвращает отсортированные данные 
     по возрастанию в виде словоря'''
-    list_dict = [
-        {'days': days[idx], 'text': text}
-        for idx, text in enumerate(texts)
-    ]
+    list_dict = [{'days': days[idx], 'text': text}
+                 for idx, text in enumerate(texts)]
     return sorted(list_dict, key=lambda value: value['days'])
 
 
@@ -55,18 +49,18 @@ def add_color(data: list) -> list:
 def result_text_date(arg: str, day: int) -> str:
     '''Выводит дни в правильном склонении'''
     if arg == 'next':
-        args = ('Остался', 'Осталось')
+        args = (f'Остался {day}', f'Осталось {day}')
     else:  # 'prev'
-        args = ('Прошел', 'Прошло')
+        args = (f'Прошел {day}', f'Прошло {day}')
 
     if day % 10 == 1 and day != 11:
-        return f'{args[0]} {day} день :'
-    elif day % 10 in [2, 3, 4] and day // 10 != 1:
-        return f'{args[1]} {day} дня :'
+        return f'{args[0]} день :'
+    elif day % 10 in range(2,5) and day // 10 != 1:
+        return f'{args[1]} дня :'
     elif day == 0:
         return 'Сегодня :'
     else:
-        return f'{args[1]} {day} дней :'
+        return f'{args[1]} дней :'
 
 
 if __name__ == '__main__':
