@@ -30,14 +30,9 @@ def message_print(canva, days_texts: list):
         if element['days'] > 0:
             text_date = result_text_date('next', element['days'])
         else:
-<<<<<<< HEAD
-            text_date = result_text_date('prev', abs(element['days']))
-        settings_message(idx*30, text_date, element['text'], element['color'])
-=======
             text_date = result_text_date('prev', -element['days'])
         canva.create_text(150, 100+idx*30, text=f"{text_date} {element['text']}",
                       anchor='w', font='Verdana 14', fill=f"{element['color']}")
->>>>>>> testbranch
 
 
 if __name__ == '__main__':
